@@ -27,6 +27,7 @@ public class ClientAccount {
 		
 		System.out.println("Imie: " + name + " Nazwisko: " + lastName + " PESEL: " + pesel);
 		counter = 1;
+		saveToTxt(name, lastname, pesel);
 	}
 	
 	public void paymentOnAccount(){
@@ -43,18 +44,30 @@ public class ClientAccount {
 	
 	public void paymentOffAccount(){
 		
-		Scanner scr = new Scanner(System.in);
-		float sum = 0;
-		System.out.println("Stan konta wynosi: " + money + " $ ");
-		System.out.println("Podaj kwotê do wyp³aty: ");
-		sum = scr.nextFloat();
-		if(money < sum){
-			System.out.println("Niewystarczaj¹ca iloœæ pieniêdzy. Wpisz 0 by wyjœæ.");
-			paymentOffAccount();
-		}else{
-			money -= sum;
+		if(counter == 1){
+			Scanner scr = new Scanner(System.in);
+			float sum = 0;
 			System.out.println("Stan konta wynosi: " + money + " $ ");
-		}
+			System.out.println("Podaj kwotê do wyp³aty: ");
+			sum = scr.nextFloat();
+			if(money < sum){
+				System.out.println("Niewystarczaj¹ca iloœæ pieniêdzy. Wpisz 0 by wyjœæ.");
+				paymentOffAccount();
+			}else{
+				money -= sum;
+				System.out.println("Stan konta wynosi: " + money + " $ ");
+			}
+		}else
+			System.out.println("Najpierw musisz za³o¿yæ konto ");
+	}
+	
+	public void SaveToTxt(Strring name, String lastName, String pesel){
+		
+		List<String> lines = Arrays.asList(name, lastName, pesel);
+		Path file = Paths.get("Clients.txt");
+		Files.write(file, lines, Charset.forName("UTF-8"));
+		System.out.println("Dokon³em zapisu ");
+		//Files.write(file, lines, Charset.forName("UTF-8"), StandardOpenOption.APPEND);
 	}
 	
 	public boolean accountExist(){
