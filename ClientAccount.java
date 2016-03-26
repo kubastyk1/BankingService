@@ -61,7 +61,7 @@ public class ClientAccount {
 			System.out.println("Najpierw musisz za³o¿yæ konto ");
 	}
 	
-	public void SaveToTxt(Strring name, String lastName, String pesel){
+	public void saveToTxt(Strring name, String lastName, String pesel){
 		
 		List<String> lines = Arrays.asList(name, lastName, pesel);
 		Path file = Paths.get("Clients.txt");
