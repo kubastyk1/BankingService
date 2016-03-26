@@ -13,10 +13,10 @@ public class BankingMenu {
 		System.out.println("Witaj w systemie bankowym: ");
 		
 			System.out.println("");
-			System.out.println("1. Za³u¿ konto ");
+			/*System.out.println("1. Za³u¿ konto ");
 			System.out.println("2. Dokonaj wp³aty ");
 			System.out.println("3. Dokonaj wyp³aty ");
-			System.out.println("4. Transfer pieniêdzy ");
+			System.out.println("4. Transfer pieniêdzy ");*/
 			System.out.println("5. Informacja o kliencje ");
 			System.out.println("6. Informacja o wszystkich ");
 			System.out.println("-----------");
