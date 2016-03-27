@@ -6,8 +6,6 @@ public class BankingMenu {
 
 	public void mainMenu(){
 		
-	
-		
 		int g = 0;
 		Scanner odczyt = new Scanner(System.in);
 		String s1 = " ";
@@ -17,9 +15,8 @@ public class BankingMenu {
 			System.out.println("1. Za³u¿ konto ");
 			System.out.println("2. Dokonaj wp³aty ");
 			System.out.println("3. Dokonaj wyp³aty ");
-			System.out.println("4. Wybierz klienta ");
-			System.out.println("4. Wybór klienta ");
-			System.out.println("5. Informacja o wszystkich klientach ");
+			System.out.println("4. Wyœwietl wszystkich klientów ");
+			System.out.println("5. Wybór klienta ");
 			System.out.println("-----------");
 			System.out.println("9. Zakoñcz");
 			System.out.println("Wybierz polecenie: ");
@@ -46,7 +43,7 @@ public class BankingMenu {
 				break;
 		case 3: account.paymentOffAccount();
 				break;
-		case 4: ioAccount.readFile();
+		case 4: ioAccount.chooseClient();
 				break;
 		case 5: ioAccount.showClients();
 				break;

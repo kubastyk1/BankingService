@@ -1,26 +1,19 @@
-import java.io.BufferedReader;
-import java.io.FileReader;
 import java.io.IOException;
-import java.io.LineNumberReader;
 import java.nio.charset.Charset;
 import java.nio.file.FileAlreadyExistsException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.nio.file.Path;
 import java.nio.file.StandardOpenOption;
-import java.nio.*;
 import java.util.*;
-import java.util.stream.Stream;
 
 public class ClientAccount {
 
-	public String name, lastName, pesel, adres;
-	public static float money = 0;
-	public static int accountNumber = 0;
-	public static int counter = 0;
-	List<String> clients;
-	String filePath = "f:\\myfile.txt";
-	Path file = Paths.get("f:\\myfile.txt");
+	private String name, lastName, pesel;
+	private static float money = 0;
+	private static int accountNumber = 0, counter = 0;
+	private List<String> clients;
+	private Path file = Paths.get("f:\\myfile.txt");
 	
 	public void createAccount(){
 		

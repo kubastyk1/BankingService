@@ -57,7 +57,7 @@ public class WritingReadingTxt {
 		  }*/
 	}
 	
-	public void readFile() {
+	public void chooseClient() {
 		
 		showClients();
 		Scanner scr = new Scanner(System.in);
