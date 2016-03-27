@@ -129,9 +129,41 @@ public class ClientAccount {
 	
 	public void readFile() {
 		
+		int i = 0;
+		showClients();
+		
+		Scanner scr = new Scanner(System.in);
+		System.out.println("Podaj numer klienta: ");
+		int clientNumber = scr.nextInt();
+		
+		try {
+			String[] table = new String[5];
+		    FileReader fileReader = new FileReader(filePath);
+		    BufferedReader bufferedReader = new BufferedReader(fileReader);
+		    String textLine = bufferedReader.readLine();
+		    for(i = 0; i < ((clientNumber - 1) * 5) - 1; i++ ){
+		    	bufferedReader.readLine();
+		    } 
+		    i = 0;
+		    do{
+		    	table[i] = bufferedReader.readLine();
+		    	i++;
+		    }while(i != 5);
+		    
+		    for(i = 0; i < 5; i++)
+    			System.out.print(table[i] + " - ");
+		    System.out.println();
+		    
+		}catch (IOException e){
+			e.printStackTrace();
+		  } /*finally {
+		    bufferedReader.close();
+		  }*/
 		
 		
-		 FileReader fr = null;
+		
+		
+		/* FileReader fr = null;
 	      LineNumberReader lnr = null;
 	      String str;
 	      int i;
