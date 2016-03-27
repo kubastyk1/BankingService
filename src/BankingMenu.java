@@ -1,3 +1,4 @@
+import java.io.FileNotFoundException;
 import java.util.Scanner;
 
 
@@ -34,7 +35,7 @@ public class BankingMenu {
 		//odczyt.close();
 	}
 	
-	public void chooseAnOption(int g){
+	public void chooseAnOption(int g) {
 		
 		ClientAccount account = new  ClientAccount();
 		WritingReadingTxt ioAccount = new WritingReadingTxt();
