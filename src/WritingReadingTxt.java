@@ -57,7 +57,7 @@ public class WritingReadingTxt {
 		  }*/
 	}
 	
-	public void chooseClient() {
+	public String[] chooseClient() {
 		
 		showClients();
 		Scanner scr = new Scanner(System.in);
@@ -80,5 +80,6 @@ public class WritingReadingTxt {
 		  } /*finally {
 		    bufferedReader.close();
 		  }*/
+		return table;
 	   }
 }

@@ -14,7 +14,7 @@ public class ClientAccount {
 	private static int accountNumber = 0, counter = 0;
 	private List<String> clients;
 	private Path file = Paths.get("f:\\myfile.txt");
-	
+	private WritingReadingTxt ioAccount = new WritingReadingTxt();
 	public void createAccount(){
 		
 		Scanner scr = new Scanner(System.in);
@@ -40,14 +40,14 @@ public class ClientAccount {
 	
 	public void paymentOnAccount(){
 		
-		if(counter == 1){
-			Scanner scr = new Scanner(System.in);
-			System.out.println("Stan konta wynosi: " + money + " $ ");
-			System.out.println("Podaj kwotê do wp³aty: ");
-			money += scr.nextFloat();
-			System.out.println("Stan konta wynosi: " + money + " $ ");
-		}else
-			System.out.println("Najpierw musisz za³o¿yæ konto ");
+		String[] table = ioAccount.chooseClient();
+		money = Float.parseFloat(table[4]);
+		Scanner scr = new Scanner(System.in);
+		System.out.println("Stan konta wynosi: " + money + " $ ");
+		System.out.println("Podaj kwotê do wp³aty: ");
+		money += scr.nextFloat();
+		System.out.println("Stan konta wynosi: " + money + " $ ");
+		
 	}
 	
 	public void paymentOffAccount(){
