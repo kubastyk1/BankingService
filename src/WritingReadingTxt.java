@@ -1,5 +1,6 @@
 import java.io.BufferedReader;
 import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.io.FileReader;
 import java.io.IOException;
 import java.nio.charset.Charset;
@@ -58,12 +59,28 @@ public class WritingReadingTxt {
 	public void writePayment(int clientNumber, float money){
 		
 		BufferedReader bufferedReader = initialize();
-		int lineNumber = ((clientNumber - 1) * argNumber) + 4;
+		/*int lineNumber = ((clientNumber - 1) * argNumber) + 4;
 		goToLine(bufferedReader, lineNumber);
-		String my_money = Float.toString(money);
-		clients = Arrays.asList(my_money);
+		String my_money = Float.toString(money);*/
+		/*clients = Arrays.asList(my_money);
 		try {
 			Files.write(file, clients, Charset.forName("UTF-8"));
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}*/
+		
+		String line;
+	    String input = "";
+	    try{
+	    while ((line = bufferedReader.readLine()) != null)
+	        input += line + System.lineSeparator();
+
+	    input = input.replace("110.0", "1-120.0");
+
+		
+			FileOutputStream os = new FileOutputStream(filePath);
+			os.write(input.getBytes());
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -99,9 +116,9 @@ public class WritingReadingTxt {
 		Scanner scr = new Scanner(System.in);
 		System.out.println("Podaj numer klienta: ");
 		int clientNumber = scr.nextInt();
-		int numberOfLine = (clientNumber - 1) * argNumber;
+		int numberOfLine = ((clientNumber - 1) * argNumber) - 1;
 		BufferedReader bufferedReader = initialize();
-		
+
 		try {	
 			bufferedReader = goToLine(bufferedReader, numberOfLine);
 			System.out.println("Tu jestem ");
