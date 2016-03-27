@@ -1,6 +1,7 @@
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
+import java.io.LineNumberReader;
 import java.nio.charset.Charset;
 import java.nio.file.FileAlreadyExistsException;
 import java.nio.file.Files;
@@ -76,7 +77,7 @@ public class ClientAccount {
 		
 		String my_money = Float.toString(money);
 		String my_number = Integer.toString(accountNumber);
-		clients = Arrays.asList(name, lastName, pesel, my_money, my_number);
+		clients = Arrays.asList(my_number, name, lastName, pesel, my_money);
 		if(!Files.exists(file)){
 			try {
 			    // Create the empty file with default permissions, etc.
@@ -98,38 +99,72 @@ public class ClientAccount {
 		
 	}
 	
-	public void showClients() throws IOException{
-		 
-		try {
-			Stream<String> lines = Files.lines(file);
-			lines.forEach(s -> System.out.println(s));
-			
-			BufferedReader bufferedReader = new BufferedReader( new FileReader("f:\\myfile.txt"));
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+	public void showClients(){
 		
+		try {
+			String[] table = new String[5];
+			int i = 0;
+		    FileReader fileReader = new FileReader(filePath);
+		    BufferedReader bufferedReader = new BufferedReader(fileReader);
+		    String textLine = bufferedReader.readLine();
+		    do {
+		    	if(i != 5){
+		    		table[i] = textLine;
+		    		textLine = bufferedReader.readLine();
+		    		i++;
+		    	}else {
+		    		for(i = 0; i < 5; i++)
+		    			System.out.print(table[i] + " - ");
+		    		System.out.println();
+		    		i = 0;
+		    	}
+		    } while (textLine != null || i == 5);
+		    
+		}catch (IOException e){
+			e.printStackTrace();
+		  } /*finally {
+		    bufferedReader.close();
+		  }*/
 	}
 	
 	public void readFile() {
 		
-		try {
-		  FileReader fileReader = new FileReader(filePath);
-		  BufferedReader bufferedReader = new BufferedReader(fileReader);
-		    String textLine = bufferedReader.readLine();
-		    do {
-		      System.out.println(textLine);
-		  
-		      textLine = bufferedReader.readLine();
-		    } while (textLine != null);
-		}catch (IOException e){
-			e.printStackTrace();
-		  /*} finally {
-		    bufferedReader.close();
-		  }*/
-		}
-	}
+		
+		
+		 FileReader fr = null;
+	      LineNumberReader lnr = null;
+	      String str;
+	      int i;
+	      
+	      try{
+	         // create new reader
+	         fr = new FileReader(filePath);
+	         lnr = new LineNumberReader(fr);
+	   
+	         // read lines till the end of the stream
+	         while((str=lnr.readLine())!=null)
+	         {
+	            i=lnr.getLineNumber();
+	            System.out.print("("+i+")");
+	                  
+	            // prints string
+	            System.out.println(str);
+	            lnr.setLineNumber(i + 5);
+	         }
+	      }catch(Exception e){
+	         
+	         // if any error occurs
+	         e.printStackTrace();
+	      }/*finally{
+	         
+	         // closes the stream and releases system resources
+	         if(fr!=null)
+	            fr.close();
+	         if(lnr!=null)
+	            lnr.close();
+	      }*/
+	   }
+	
 	
 	public boolean accountExist(){
 		

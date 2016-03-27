@@ -47,6 +47,8 @@ public class BankingMenu {
 				break;
 		case 4: account.readFile();
 				break;
+		case 5: account.showClients();
+				break;
 		default: System.out.println("Koniec programu");
 				System.exit(1);
 				break;
