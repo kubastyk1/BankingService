@@ -1,11 +1,25 @@
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.IOException;
+import java.nio.charset.Charset;
+import java.nio.file.FileAlreadyExistsException;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+import java.nio.file.Path;
+import java.nio.file.StandardOpenOption;
+import java.nio.*;
 import java.util.*;
+import java.util.stream.Stream;
 
 public class ClientAccount {
 
 	public String name, lastName, pesel, adres;
 	public static float money = 0;
-	public int accauntNumber;
+	public static int accountNumber = 0;
 	public static int counter = 0;
+	List<String> clients;
+	String filePath = "f:\\myfile.txt";
+	Path file = Paths.get("f:\\myfile.txt");
 	
 	public void createAccount(){
 		
@@ -24,9 +38,10 @@ public class ClientAccount {
 			System.out.println("Podaj PESEL: ");
 			pesel = scr.nextLine();
 		}while(!pesel.matches("[0-9]+") /*&& pesel.length() == 11*/);
-		
-		System.out.println("Imie: " + name + " Nazwisko: " + lastName + " PESEL: " + pesel);
+		accountNumber += 1;
+		System.out.println(accountNumber + " :::: Imie: " + name + " Nazwisko: " + lastName + " PESEL: " + pesel);
 		counter = 1;
+		saveInTxt(name, lastName, pesel, money, accountNumber);
 	}
 	
 	public void paymentOnAccount(){
@@ -54,6 +69,65 @@ public class ClientAccount {
 		}else{
 			money -= sum;
 			System.out.println("Stan konta wynosi: " + money + " $ ");
+		}
+	}
+	
+	public void saveInTxt(String name, String lastName, String pesel, float money, int accountNumber) {
+		
+		String my_money = Float.toString(money);
+		String my_number = Integer.toString(accountNumber);
+		clients = Arrays.asList(name, lastName, pesel, my_money, my_number);
+		if(!Files.exists(file)){
+			try {
+			    // Create the empty file with default permissions, etc.
+			    Files.createFile(file);
+			} catch (FileAlreadyExistsException x) {
+			    System.err.format("file named %s" + " already exists%n", file);
+			} catch (IOException x) {
+			    // Some other sort of failure, such as permissions.
+			    System.err.format("createFile error: %s%n", x);
+			}
+		}
+		
+		try {
+			Files.write(file, clients, Charset.forName("UTF-8"), StandardOpenOption.APPEND);
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+	}
+	
+	public void showClients() throws IOException{
+		 
+		try {
+			Stream<String> lines = Files.lines(file);
+			lines.forEach(s -> System.out.println(s));
+			
+			BufferedReader bufferedReader = new BufferedReader( new FileReader("f:\\myfile.txt"));
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+	}
+	
+	public void readFile() {
+		
+		try {
+		  FileReader fileReader = new FileReader(filePath);
+		  BufferedReader bufferedReader = new BufferedReader(fileReader);
+		    String textLine = bufferedReader.readLine();
+		    do {
+		      System.out.println(textLine);
+		  
+		      textLine = bufferedReader.readLine();
+		    } while (textLine != null);
+		}catch (IOException e){
+			e.printStackTrace();
+		  /*} finally {
+		    bufferedReader.close();
+		  }*/
 		}
 	}
 	
