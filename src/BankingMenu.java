@@ -37,6 +37,7 @@ public class BankingMenu {
 	public void chooseAnOption(int g){
 		
 		ClientAccount account = new  ClientAccount();
+		WritingReadingTxt ioAccount = new WritingReadingTxt();
 		switch(g) {
 		case 1: account.createAccount();
 				break;
@@ -44,9 +45,9 @@ public class BankingMenu {
 				break;
 		case 3: account.paymentOffAccount();
 				break;
-		case 4: account.readFile();
+		case 4: ioAccount.readFile();
 				break;
-		case 5: account.showClients();
+		case 5: ioAccount.showClients();
 				break;
 		default: System.out.println("Koniec programu");
 				System.exit(1);
