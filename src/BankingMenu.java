@@ -15,8 +15,8 @@ public class BankingMenu {
 			System.out.println("1. Za³u¿ konto ");
 			System.out.println("2. Dokonaj wp³aty ");
 			System.out.println("3. Dokonaj wyp³aty ");
-			System.out.println("4. Wyœwietl wszystkich klientów ");
-			System.out.println("5. Wybór klienta ");
+			System.out.println("4. Wybór klienta ");
+			System.out.println("5. Wyœwietl wszystkich klientów  ");
 			System.out.println("-----------");
 			System.out.println("9. Zakoñcz");
 			System.out.println("Wybierz polecenie: ");

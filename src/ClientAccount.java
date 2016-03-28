@@ -32,13 +32,13 @@ public class ClientAccount {
 	public void paymentOnAccount(){
 		
 		String[] table = ioAccount.chooseClient();
-		money = Float.parseFloat(table[4]);
+		float oldMoney = Float.parseFloat(table[4]);
 		Scanner scr = new Scanner(System.in);
-		System.out.println("Stan konta wynosi: " + money + " $ ");
+		System.out.println("Stan konta wynosi: " + oldMoney + " $ ");
 		System.out.println("Podaj kwotê do wp³aty: ");
-		money += scr.nextFloat();
+		money = oldMoney + scr.nextFloat();
 		System.out.println("Stan konta wynosi: " + money + " $ ");
-		ioAccount.writePayment(Integer.parseInt(table[0]), money);
+		ioAccount.writePayment(Integer.parseInt(table[0]), oldMoney, money);
 		
 	}
 	

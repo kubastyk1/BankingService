@@ -56,11 +56,50 @@ public class WritingReadingTxt {
 		return bufferedReader;
 	}
 	
-	public void writePayment(int clientNumber, float money){
+	public void writePayment(int clientNumber, float oldMoney, float money){
 		
+		String line;
+	    String input = "";
+	    String fullInput = "";
+	    String helper = "";
+	    String helper2 = "";
 		BufferedReader bufferedReader = initialize();
-		/*int lineNumber = ((clientNumber - 1) * argNumber) + 4;
-		goToLine(bufferedReader, lineNumber);
+		int lineNumber = ((clientNumber - 1) * argNumber) + 4;
+		for(i = 0; i < lineNumber; i++ )
+			try {
+				line = bufferedReader.readLine();
+				input += line +  System.lineSeparator();
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+		try {
+			helper = bufferedReader.readLine();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		helper = helper.replace(Float.toString(oldMoney), Float.toString(money));
+		try{
+			helper2 = System.lineSeparator();
+		    while ((line = bufferedReader.readLine()) != null)
+		        helper2 += line + System.lineSeparator();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		fullInput = input + helper + helper2;
+		
+		FileOutputStream os;
+		try {
+			os = new FileOutputStream(filePath);
+			os.write(fullInput.getBytes());
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		
+		/*goToLine(bufferedReader, lineNumber);
 		String my_money = Float.toString(money);*/
 		/*clients = Arrays.asList(my_money);
 		try {
@@ -70,21 +109,21 @@ public class WritingReadingTxt {
 			e.printStackTrace();
 		}*/
 		
-		String line;
+		/*String line;
 	    String input = "";
 	    try{
-	    while ((line = bufferedReader.readLine()) != null)
-	        input += line + System.lineSeparator();
-
-	    input = input.replace("110.0", "1-120.0");
-
-		
-			FileOutputStream os = new FileOutputStream(filePath);
-			os.write(input.getBytes());
+		    while ((line = bufferedReader.readLine()) != null)
+		        input += line + System.lineSeparator();
+	
+		    input = input.replace("0.0", "3120.0");
+	
+			
+				FileOutputStream os = new FileOutputStream(filePath);
+				os.write(input.getBytes());
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-		}
+		}*/
 	}
 	
 	public void showClients(){
@@ -116,11 +155,12 @@ public class WritingReadingTxt {
 		Scanner scr = new Scanner(System.in);
 		System.out.println("Podaj numer klienta: ");
 		int clientNumber = scr.nextInt();
-		int numberOfLine = ((clientNumber - 1) * argNumber) - 1;
+		int numberOfLine = (clientNumber - 1) * argNumber;
 		BufferedReader bufferedReader = initialize();
 
 		try {	
 			bufferedReader = goToLine(bufferedReader, numberOfLine);
+			i=0;		//must be zero
 			System.out.println("Tu jestem ");
 		    do{
 		    	table[i] = bufferedReader.readLine();
