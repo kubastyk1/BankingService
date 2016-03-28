@@ -29,7 +29,7 @@ public class BankingMenu {
 			}
 			chooseAnOption(g);
 		}while(!s1.equalsIgnoreCase("close"));
-		//odczyt.close();
+		
 	}
 	
 	public void chooseAnOption(int g) {

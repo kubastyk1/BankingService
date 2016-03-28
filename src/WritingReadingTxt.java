@@ -28,7 +28,6 @@ public class WritingReadingTxt {
 		try {
 			fileReader = new FileReader(filePath);
 		} catch (FileNotFoundException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 			System.exit(1);
 			BufferedReader bufferedReader = null;
@@ -64,7 +63,6 @@ public class WritingReadingTxt {
 			while (bufferedReader.readLine() !=  null)
 				count++;
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		
@@ -91,7 +89,6 @@ public class WritingReadingTxt {
 			os.write(fullInput.getBytes());
 			
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}
@@ -114,9 +111,7 @@ public class WritingReadingTxt {
 		    
 		}catch (IOException e){
 			e.printStackTrace();
-		  } /*finally {
-		    bufferedReader.close();
-		  }*/
+		  }
 	}
 	
 	public String[] chooseClient() {
@@ -143,9 +138,7 @@ public class WritingReadingTxt {
 		    printingInformation();
 		}catch (IOException e){
 			e.printStackTrace();
-		  } /*finally {
-		    bufferedReader.close();
-		  }*/
+		  }
 		
 		return table;
 	   }
