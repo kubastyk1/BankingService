@@ -44,18 +44,21 @@ public class ClientAccount {
 	
 	public void paymentOffAccount(){
 		
-		Scanner scr = new Scanner(System.in);
+		String[] table = ioAccount.chooseClient();
+		float oldMoney = Float.parseFloat(table[4]);
 		float sum = 0;
+		Scanner scr = new Scanner(System.in);
 		System.out.println("Stan konta wynosi: " + money + " $ ");
 		System.out.println("Podaj kwotê do wyp³aty: ");
 		sum = scr.nextFloat();
-		if(money < sum){
+		if(oldMoney < sum){
 			System.out.println("Niewystarczaj¹ca iloœæ pieniêdzy. Wpisz 0 by wyjœæ.");
 			paymentOffAccount();
 		}else{
-			money -= sum;
+			money = oldMoney - sum;
 			System.out.println("Stan konta wynosi: " + money + " $ ");
 		}
+		ioAccount.writePayment(Integer.parseInt(table[0]), oldMoney, money);
 	}
 	
 	public boolean accountExist(){

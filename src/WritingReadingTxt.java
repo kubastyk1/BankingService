@@ -116,7 +116,6 @@ public class WritingReadingTxt {
 		try {	
 			bufferedReader = goToLine(bufferedReader, numberOfLine);
 			i=0;		//must be zero
-			System.out.println("Tu jestem ");
 		    do{
 		    	table[i] = bufferedReader.readLine();
 		    	i++;
