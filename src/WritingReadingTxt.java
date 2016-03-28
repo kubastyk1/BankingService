@@ -9,6 +9,7 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.nio.file.StandardOpenOption;
 import java.util.Arrays;
+import java.util.InputMismatchException;
 import java.util.List;
 import java.util.Scanner;
 
@@ -122,8 +123,13 @@ public class WritingReadingTxt {
 		
 		showClients();
 		Scanner scr = new Scanner(System.in);
+		int clientNumber = 0;
 		System.out.println("Podaj numer klienta: ");
-		int clientNumber = scr.nextInt();
+		try{
+			clientNumber = scr.nextInt();
+		} catch(InputMismatchException e){
+			e.printStackTrace();
+		}
 		int numberOfLine = (clientNumber - 1) * argNumber;
 		BufferedReader bufferedReader = initialize();
 

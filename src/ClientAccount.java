@@ -36,7 +36,11 @@ public class ClientAccount {
 		Scanner scr = new Scanner(System.in);
 		System.out.println("Stan konta wynosi: " + oldMoney + " $ ");
 		System.out.println("Podaj kwotê do wp³aty: ");
-		money = oldMoney + scr.nextFloat();
+		try{
+			money = oldMoney + scr.nextFloat();
+		} catch(InputMismatchException e){
+			e.printStackTrace();
+		}
 		System.out.println("Stan konta wynosi: " + money + " $ ");
 		ioAccount.writePayment(Integer.parseInt(table[0]), oldMoney, money);
 		
@@ -50,7 +54,11 @@ public class ClientAccount {
 		Scanner scr = new Scanner(System.in);
 		System.out.println("Stan konta wynosi: " + money + " $ ");
 		System.out.println("Podaj kwotê do wyp³aty: ");
-		sum = scr.nextFloat();
+		try{
+			sum = scr.nextFloat();
+		} catch(InputMismatchException e){
+			e.printStackTrace();
+		}
 		if(oldMoney < sum){
 			System.out.println("Niewystarczaj¹ca iloœæ pieniêdzy. Wpisz 0 by wyjœæ.");
 			paymentOffAccount();
