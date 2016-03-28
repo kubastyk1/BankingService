@@ -137,19 +137,17 @@ public class WritingReadingTxt {
 		clients = Arrays.asList(my_number, name, lastName, pesel, my_money);
 		if(!Files.exists(file)){
 			try {
-			    // Create the empty file with default permissions, etc.
 			    Files.createFile(file);
-			} catch (FileAlreadyExistsException x) {
-			    System.err.format("file named %s" + " already exists%n", file);
 			} catch (IOException x) {
-			    // Some other sort of failure, such as permissions.
 			    System.err.format("createFile error: %s%n", x);
 			}
 		}
 		
-		try {
+		try{
+			BufferedReader bufferedReader = initialize();
+			bufferedReader.readLine();
 			Files.write(file, clients, Charset.forName("UTF-8"), StandardOpenOption.APPEND);
-		} catch (IOException e) {
+		}catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
