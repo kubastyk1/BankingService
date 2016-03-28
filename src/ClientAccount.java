@@ -4,8 +4,9 @@ public class ClientAccount {
 
 	private String name, lastName, pesel;
 	private static float money = 0;
-	private static int accountNumber = 0, counter = 0;
+	private static int accountNumber = 0;
 	private WritingReadingTxt ioAccount = new WritingReadingTxt();
+	
 	public void createAccount(){
 		
 		Scanner scr = new Scanner(System.in);
@@ -23,9 +24,8 @@ public class ClientAccount {
 			System.out.println("Podaj PESEL: ");
 			pesel = scr.nextLine();
 		}while(!pesel.matches("[0-9]+") /*&& pesel.length() == 11*/);
-		accountNumber += 1;
+		accountNumber = ioAccount.getAccountNumber() + 1;
 		System.out.println(accountNumber + " :::: Imie: " + name + " Nazwisko: " + lastName + " PESEL: " + pesel);
-		counter = 1;
 		ioAccount.saveInTxt(name, lastName, pesel, money, accountNumber);
 	}
 	
@@ -61,14 +61,5 @@ public class ClientAccount {
 		ioAccount.writePayment(Integer.parseInt(table[0]), oldMoney, money);
 	}
 	
-	public boolean accountExist(){
-		
-		boolean exist;
-		if(counter == 1)
-			exist = true;
-		else
-			exist = false;
-		return exist;
-	}
 	
 }

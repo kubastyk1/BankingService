@@ -4,7 +4,6 @@ import java.io.FileOutputStream;
 import java.io.FileReader;
 import java.io.IOException;
 import java.nio.charset.Charset;
-import java.nio.file.FileAlreadyExistsException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -54,6 +53,21 @@ public class WritingReadingTxt {
 				e.printStackTrace();
 			}
 		return bufferedReader;
+	}
+	
+	private int howManyLines(){
+		
+		int count = 0;
+		BufferedReader bufferedReader = initialize();
+		try {
+			while (bufferedReader.readLine() !=  null)
+				count++;
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		return count;
 	}
 	
 	public void writePayment(int clientNumber, float oldMoney, float money){
@@ -129,6 +143,21 @@ public class WritingReadingTxt {
 		
 		return table;
 	   }
+	
+	public int getAccountNumber(){
+		
+		int accountNumber = 0;
+		BufferedReader bufferedReader = initialize();
+		int numberOfLine = howManyLines() - argNumber;
+		try{
+			goToLine(bufferedReader, numberOfLine);       
+			accountNumber = Integer.parseInt(bufferedReader.readLine());
+		}catch(IOException e){
+			e.printStackTrace();
+		}
+		
+		return accountNumber;
+	}
 	
 	public void saveInTxt(String name, String lastName, String pesel, float money, int accountNumber) {
 		
