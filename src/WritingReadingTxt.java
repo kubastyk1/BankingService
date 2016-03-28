@@ -58,72 +58,27 @@ public class WritingReadingTxt {
 	
 	public void writePayment(int clientNumber, float oldMoney, float money){
 		
-		String line;
-	    String input = "";
-	    String fullInput = "";
-	    String helper = "";
-	    String helper2 = "";
+		String line, input = "", fullInput = "", helper = "", helper2 = "";
 		BufferedReader bufferedReader = initialize();
 		int lineNumber = ((clientNumber - 1) * argNumber) + 4;
-		for(i = 0; i < lineNumber; i++ )
-			try {
+		try{
+			for(i = 0; i < lineNumber; i++ ){
 				line = bufferedReader.readLine();
 				input += line +  System.lineSeparator();
-			} catch (IOException e) {
-				e.printStackTrace();
 			}
-		try {
-			helper = bufferedReader.readLine();
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		helper = helper.replace(Float.toString(oldMoney), Float.toString(money));
-		try{
+			helper = bufferedReader.readLine();		
+			helper = helper.replace(Float.toString(oldMoney), Float.toString(money));		
 			helper2 = System.lineSeparator();
 		    while ((line = bufferedReader.readLine()) != null)
 		        helper2 += line + System.lineSeparator();
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		fullInput = input + helper + helper2;
-		
-		FileOutputStream os;
-		try {
-			os = new FileOutputStream(filePath);
+		    fullInput = input + helper + helper2;		
+		    FileOutputStream os = new FileOutputStream(filePath);
 			os.write(fullInput.getBytes());
+			
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
-		
-		/*goToLine(bufferedReader, lineNumber);
-		String my_money = Float.toString(money);*/
-		/*clients = Arrays.asList(my_money);
-		try {
-			Files.write(file, clients, Charset.forName("UTF-8"));
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}*/
-		
-		/*String line;
-	    String input = "";
-	    try{
-		    while ((line = bufferedReader.readLine()) != null)
-		        input += line + System.lineSeparator();
-	
-		    input = input.replace("0.0", "3120.0");
-	
-			
-				FileOutputStream os = new FileOutputStream(filePath);
-				os.write(input.getBytes());
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}*/
 	}
 	
 	public void showClients(){
