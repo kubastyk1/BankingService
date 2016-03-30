@@ -18,10 +18,24 @@ import org.apache.poi.ss.usermodel.Row;
 public class WritingReadingExcel {
 
 	//private Workbook wb = new HSSFWorkbook(); 
-	private String filename = "f:\\workbook.xls";
+	private String filename = "f:\\workbook11.xls";
 	//private org.apache.poi.ss.usermodel.Sheet sheet = wb.createSheet("po sheet");
 	//private int i = 0;
 	
+	private void saveInExcel(HSSFWorkbook workbook){
+		
+		try {
+		    FileOutputStream out = new FileOutputStream(new File(filename));
+		    workbook.write(out);
+		    out.close();
+		    System.out.println("Excel written successfully..");
+		     
+		} catch (FileNotFoundException e) {
+		    e.printStackTrace();
+		} catch (IOException e) {
+		    e.printStackTrace();
+		}
+	}
 	
 	public void readExcel(){
 		
@@ -103,9 +117,9 @@ public class WritingReadingExcel {
 		    }
 		}
 		 
-		try {
-		    FileOutputStream out = 
-		            new FileOutputStream(new File(filename));
+		saveInExcel(workbook);
+		/*try {
+		    FileOutputStream out = new FileOutputStream(new File(filename));
 		    workbook.write(out);
 		    out.close();
 		    System.out.println("Excel written successfully..");
@@ -114,7 +128,7 @@ public class WritingReadingExcel {
 		    e.printStackTrace();
 		} catch (IOException e) {
 		    e.printStackTrace();
-		}
+		}*/
 	}
 	
 	public void updateExcel(){
@@ -136,9 +150,10 @@ public class WritingReadingExcel {
 		     
 		    file.close();
 		     
-		    FileOutputStream outFile =new FileOutputStream(new File(filename));
+		    /*FileOutputStream outFile =new FileOutputStream(new File(filename));
 		    workbook.write(outFile);
-		    outFile.close();
+		    outFile.close();*/
+		    saveInExcel(workbook);
 		     
 		} catch (FileNotFoundException e) {
 		    e.printStackTrace();
