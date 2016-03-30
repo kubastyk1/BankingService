@@ -48,7 +48,7 @@ public class BankingMenu {
 				break;
 		case 5: ioAccount.showClients();
 				break;
-		case 6: excel.updateExcel();
+		case 6: excel.createExcel();
 				break;
 		default: System.out.println("Koniec programu");
 				System.exit(1);

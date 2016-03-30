@@ -17,11 +17,7 @@ import org.apache.poi.ss.usermodel.Row;
 
 public class WritingReadingExcel {
 
-	//private Workbook wb = new HSSFWorkbook(); 
-	private String filename = "f:\\workbook11.xls";
-	//private org.apache.poi.ss.usermodel.Sheet sheet = wb.createSheet("po sheet");
-	//private int i = 0;
-	
+	private static final String filename = "f:\\workbook5.xls";
 	private void saveInExcel(HSSFWorkbook workbook){
 		
 		try {
@@ -92,7 +88,7 @@ public class WritingReadingExcel {
 		HSSFWorkbook workbook = new HSSFWorkbook();
 		HSSFSheet sheet = workbook.createSheet("Sample sheet");
 		 
-		Map<String, Object[]> data = new HashMap<String, Object[]>();
+		/*Map<String, Object[]> data = new HashMap<String, Object[]>();
 		data.put("1", new Object[] {"Emp No.", "Name", "Salary"});
 		data.put("2", new Object[] {1d, "John", 1500000d});
 		data.put("3", new Object[] {2d, "Sam", 800000d});
@@ -115,20 +111,9 @@ public class WritingReadingExcel {
 		        else if(obj instanceof Double)
 		            cell.setCellValue((Double)obj);
 		    }
-		}
+		}*/
 		 
 		saveInExcel(workbook);
-		/*try {
-		    FileOutputStream out = new FileOutputStream(new File(filename));
-		    workbook.write(out);
-		    out.close();
-		    System.out.println("Excel written successfully..");
-		     
-		} catch (FileNotFoundException e) {
-		    e.printStackTrace();
-		} catch (IOException e) {
-		    e.printStackTrace();
-		}*/
 	}
 	
 	public void updateExcel(){
@@ -150,9 +135,6 @@ public class WritingReadingExcel {
 		     
 		    file.close();
 		     
-		    /*FileOutputStream outFile =new FileOutputStream(new File(filename));
-		    workbook.write(outFile);
-		    outFile.close();*/
 		    saveInExcel(workbook);
 		     
 		} catch (FileNotFoundException e) {
@@ -160,6 +142,26 @@ public class WritingReadingExcel {
 		} catch (IOException e) {
 		    e.printStackTrace();
 		}
+	}
+	
+	public void createExcel(){
+		
+		HSSFWorkbook workbook = new HSSFWorkbook();
+		HSSFSheet sheet = workbook.createSheet("My sheet");
+		
+		Row row = sheet.createRow(0);
+		Cell cell = row.createCell(0);
+		cell.setCellValue("Nr.konta");
+		cell = row.createCell(1);
+		cell.setCellValue("Imie ");
+		cell = row.createCell(2);
+		cell.setCellValue("Nazwisko");
+		cell = row.createCell(3);
+		cell.setCellValue("PESEL ");
+		cell = row.createCell(5);
+		cell.setCellValue("Stan konta ");
+		
+		saveInExcel(workbook);
 	}
 	
 }
