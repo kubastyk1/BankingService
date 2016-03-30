@@ -36,6 +36,7 @@ public class BankingMenu {
 		
 		ClientAccount account = new  ClientAccount();
 		WritingReadingTxt ioAccount = new WritingReadingTxt();
+		WritingReadingExcel excel = new WritingReadingExcel();
 		switch(g) {
 		case 1: account.createAccount();
 				break;
@@ -46,6 +47,8 @@ public class BankingMenu {
 		case 4: ioAccount.chooseClient();
 				break;
 		case 5: ioAccount.showClients();
+				break;
+		case 6: excel.updateExcel();
 				break;
 		default: System.out.println("Koniec programu");
 				System.exit(1);

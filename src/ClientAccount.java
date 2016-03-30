@@ -6,6 +6,7 @@ public class ClientAccount {
 	private static float money = 0;
 	private static int accountNumber = 0;
 	private WritingReadingTxt ioAccount = new WritingReadingTxt();
+	private WritingReadingExcel excel = new WritingReadingExcel();
 	
 	public void createAccount(){
 		
@@ -26,7 +27,8 @@ public class ClientAccount {
 		}while(!pesel.matches("[0-9]+") /*&& pesel.length() == 11*/);
 		accountNumber = ioAccount.getAccountNumber() + 1;
 		System.out.println(accountNumber + " :::: Imie: " + name + " Nazwisko: " + lastName + " PESEL: " + pesel);
-		ioAccount.saveInTxt(name, lastName, pesel, money, accountNumber);
+		//ioAccount.saveInTxt(name, lastName, pesel, money, accountNumber);
+		//excel.saveInExcel(name, lastName, pesel, money, accountNumber);
 	}
 	
 	public void paymentOnAccount(){
