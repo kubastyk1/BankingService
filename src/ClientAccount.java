@@ -2,9 +2,9 @@ import java.util.*;
 
 public class ClientAccount {
 
-	private String name, lastName, pesel;
+	private String name, lastname, pesel;
 	private static float money = 0;
-	private static int accountNumber = 0;
+	private static int accountnumber = 0;
 	private WritingReadingTxt ioAccount = new WritingReadingTxt();
 	private WritingReadingExcel excel = new WritingReadingExcel();
 	
@@ -18,17 +18,18 @@ public class ClientAccount {
 		
 		do{
 			System.out.println("Podaj nazwisko: ");
-			lastName = scr.nextLine();
-		}while(!lastName.matches("[a-zA-Z]+"));
+			lastname = scr.nextLine();
+		}while(!lastname.matches("[a-zA-Z]+"));
 		
 		do{
 			System.out.println("Podaj PESEL: ");
 			pesel = scr.nextLine();
 		}while(!pesel.matches("[0-9]+") /*&& pesel.length() == 11*/);
-		accountNumber = ioAccount.getAccountNumber() + 1;
-		System.out.println(accountNumber + " :::: Imie: " + name + " Nazwisko: " + lastName + " PESEL: " + pesel);
+		accountnumber = ioAccount.getAccountNumber() + 1;
+		System.out.println(accountnumber + " :::: Imie: " + name + " Nazwisko: " + lastname + " PESEL: " + pesel);
 		//ioAccount.saveInTxt(name, lastName, pesel, money, accountNumber);
-		//excel.saveInExcel(name, lastName, pesel, money, accountNumber);
+		Object[] objtab = {accountnumber, name, lastname, pesel, money};
+		excel.writeExcel(objtab);
 	}
 	
 	public void paymentOnAccount(){

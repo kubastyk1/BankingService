@@ -18,6 +18,7 @@ import org.apache.poi.ss.usermodel.Row;
 public class WritingReadingExcel {
 
 	private static final String filename = "f:\\workbook5.xls";
+	
 	private void saveInExcel(HSSFWorkbook workbook){
 		
 		try {
@@ -83,37 +84,58 @@ public class WritingReadingExcel {
 		}
 	}
 	
-	public void writeExcel(){
-		
-		HSSFWorkbook workbook = new HSSFWorkbook();
-		HSSFSheet sheet = workbook.createSheet("Sample sheet");
-		 
-		/*Map<String, Object[]> data = new HashMap<String, Object[]>();
-		data.put("1", new Object[] {"Emp No.", "Name", "Salary"});
-		data.put("2", new Object[] {1d, "John", 1500000d});
-		data.put("3", new Object[] {2d, "Sam", 800000d});
-		data.put("4", new Object[] {3d, "Dean", 700000d});
-		 
-		Set<String> keyset = data.keySet();
-		int rownum = 0;
-		for (String key : keyset) {
-		    Row row = sheet.createRow(rownum++);
-		    Object [] objArr = data.get(key);
-		    int cellnum = 0;
-		    for (Object obj : objArr) {
-		        Cell cell = row.createCell(cellnum++);
-		        if(obj instanceof Date) 
-		            cell.setCellValue((Date)obj);
-		        else if(obj instanceof Boolean)
-		            cell.setCellValue((Boolean)obj);
-		        else if(obj instanceof String)
+	public void writeExcel(Object[] objtab){
+		try{
+			FileInputStream file = new FileInputStream(new File(filename));
+			HSSFWorkbook workbook = new HSSFWorkbook(file);
+			HSSFSheet sheet = workbook.getSheetAt(0);
+			
+			int cellnum = 0;
+			Row row = sheet.createRow(sheet.getLastRowNum() + 1);
+			Cell cell = null;
+			for(Object obj: objtab){
+				
+				cell = row.createCell(cellnum);
+		        if(obj instanceof String)
 		            cell.setCellValue((String)obj);
-		        else if(obj instanceof Double)
-		            cell.setCellValue((Double)obj);
-		    }
-		}*/
-		 
-		saveInExcel(workbook);
+		        else if(obj instanceof Integer)
+		            cell.setCellValue((Integer)obj);
+		        else if(obj instanceof Float)
+		            cell.setCellValue((Float)obj);
+				
+				cellnum++;
+			}
+			
+			
+			/*Map<String, Object[]> data = new HashMap<String, Object[]>();
+			data.put("1", new Object[] {"Emp No.", "Name", "Salary"});
+			data.put("2", new Object[] {1d, "John", 1500000d});
+			data.put("3", new Object[] {2d, "Sam", 800000d});
+			data.put("4", new Object[] {3d, "Dean", 700000d});
+			 
+			Set<String> keyset = data.keySet();
+			int rownum = 0;
+			for (String key : keyset) {
+			    Row row = sheet.createRow(rownum++);
+			    Object [] objArr = data.get(key);
+			    int cellnum = 0;
+			    for (Object obj : objArr) {
+			        Cell cell = row.createCell(cellnum++);
+			        if(obj instanceof Date) 
+			            cell.setCellValue((Date)obj);
+			        else if(obj instanceof Boolean)
+			            cell.setCellValue((Boolean)obj);
+			        else if(obj instanceof String)
+			            cell.setCellValue((String)obj);
+			        else if(obj instanceof Double)
+			            cell.setCellValue((Double)obj);
+			    }
+			}*/
+			 
+			saveInExcel(workbook);
+		} catch (IOException e) {
+		    e.printStackTrace();
+		}
 	}
 	
 	public void updateExcel(){
