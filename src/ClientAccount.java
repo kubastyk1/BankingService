@@ -28,8 +28,8 @@ public class ClientAccount {
 		accountnumber = ioAccount.getAccountNumber() + 1;
 		System.out.println(accountnumber + " :::: Imie: " + name + " Nazwisko: " + lastname + " PESEL: " + pesel);
 		//ioAccount.saveInTxt(name, lastName, pesel, money, accountNumber);
-		Object[] objtab = {accountnumber, name, lastname, pesel, money};
-		excel.writeExcel(objtab);
+		String[] strtab = {Integer.toString(accountnumber), name, lastname, pesel, Float.toString(money)};
+		excel.writeExcel(strtab);
 	}
 	
 	public void paymentOnAccount(){
@@ -46,6 +46,7 @@ public class ClientAccount {
 		}
 		System.out.println("Stan konta wynosi: " + money + " $ ");
 		ioAccount.writePayment(Integer.parseInt(table[0]), oldMoney, money);
+		excel.updateExcel();
 		
 	}
 	

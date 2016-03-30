@@ -50,6 +50,10 @@ public class BankingMenu {
 				break;
 		case 6: excel.createExcel();
 				break;
+		case 7: excel.readExcel();
+				break;
+		case 8: excel.updateExcel();
+				break;
 		default: System.out.println("Koniec programu");
 				System.exit(1);
 				break;

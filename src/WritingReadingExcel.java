@@ -3,11 +3,9 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
-import java.sql.Date;
-import java.util.HashMap;
+import java.util.InputMismatchException;
 import java.util.Iterator;
-import java.util.Map;
-import java.util.Set;
+import java.util.Scanner;
 
 import org.apache.poi.hssf.usermodel.HSSFSheet;
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
@@ -18,6 +16,7 @@ import org.apache.poi.ss.usermodel.Row;
 public class WritingReadingExcel {
 
 	private static final String filename = "f:\\workbook5.xls";
+	private static final int argnumber = 5; 
 	
 	private void saveInExcel(HSSFWorkbook workbook){
 		
@@ -84,7 +83,8 @@ public class WritingReadingExcel {
 		}
 	}
 	
-	public void writeExcel(Object[] objtab){
+	public void writeExcel(String[] strtab){
+		
 		try{
 			FileInputStream file = new FileInputStream(new File(filename));
 			HSSFWorkbook workbook = new HSSFWorkbook(file);
@@ -93,16 +93,10 @@ public class WritingReadingExcel {
 			int cellnum = 0;
 			Row row = sheet.createRow(sheet.getLastRowNum() + 1);
 			Cell cell = null;
-			for(Object obj: objtab){
+			for(String str: strtab){
 				
 				cell = row.createCell(cellnum);
-		        if(obj instanceof String)
-		            cell.setCellValue((String)obj);
-		        else if(obj instanceof Integer)
-		            cell.setCellValue((Integer)obj);
-		        else if(obj instanceof Float)
-		            cell.setCellValue((Float)obj);
-				
+		        cell.setCellValue(str);
 				cellnum++;
 			}
 			
@@ -145,10 +139,18 @@ public class WritingReadingExcel {
 		 
 		    HSSFWorkbook workbook = new HSSFWorkbook(file);
 		    HSSFSheet sheet = workbook.getSheetAt(0);
-		    Cell cell = null;
+		    //Cell cell = null;
 		 
+		   /* Object[] strtab = new Object[argnumber];
+			strtab =*/ chooseClient();
+			
+			/*for(Object s: strtab)
+				System.out.println(s + " / --  / ");
+			*/
+			
+			
 		    //Update the value of cell
-		    cell = sheet.getRow(1).getCell(2);
+		    /*cell = sheet.getRow(1).getCell(2);
 		    cell.setCellValue(cell.getNumericCellValue() * 2);
 		    cell = sheet.getRow(2).getCell(2);
 		    cell.setCellValue(cell.getNumericCellValue() * 2);
@@ -157,7 +159,7 @@ public class WritingReadingExcel {
 		     
 		    file.close();
 		     
-		    saveInExcel(workbook);
+		    saveInExcel(workbook);*/
 		     
 		} catch (FileNotFoundException e) {
 		    e.printStackTrace();
@@ -180,10 +182,61 @@ public class WritingReadingExcel {
 		cell.setCellValue("Nazwisko");
 		cell = row.createCell(3);
 		cell.setCellValue("PESEL ");
-		cell = row.createCell(5);
+		cell = row.createCell(4);
 		cell.setCellValue("Stan konta ");
 		
 		saveInExcel(workbook);
 	}
 	
+	public void/* Object[]*/ chooseClient(){
+		
+		Object[] strtab = new Object[argnumber];
+		try {
+		    FileInputStream file = new FileInputStream(new File(filename));
+		 
+		    HSSFWorkbook workbook = new HSSFWorkbook(file);
+		    HSSFSheet sheet = workbook.getSheetAt(0);
+		 
+		    Scanner scr = new Scanner(System.in);
+			System.out.println("Podaj numer klienta: ");
+			int clientnum = scr.nextInt();
+			double du = 1;
+			Cell cell = sheet.getRow(clientnum).getCell(0);
+			double d = cell.getNumericCellValue();
+			System.out.println(d + " d ");
+			if(d == clientnum){
+				//Row row = sheet.createRow(clientnum);
+				for(int i = 0; i < argnumber; i++){
+					cell = sheet.getRow(clientnum).getCell(i);
+					
+					/*du = cell.getNumericCellValue();
+					System.out.println( du + "---**");*/
+					switch(cell.getCellType()) {
+	                case Cell.CELL_TYPE_BOOLEAN:
+	                    System.out.print(cell.getBooleanCellValue() + "\t");
+	                    strtab[i] = cell.getBooleanCellValue();
+	                    break;
+	                case Cell.CELL_TYPE_NUMERIC:
+	                    System.out.print(cell.getNumericCellValue() + "\t");
+	                    strtab[i] = cell.getNumericCellValue();
+	                    break;
+	                case Cell.CELL_TYPE_STRING:
+	                    System.out.print(cell.getStringCellValue() + "\t");
+	                    strtab[i] = cell.getStringCellValue();
+	                    break;
+					}
+				}
+			}else
+				System.out.println("Nie ma takiego klienta ");
+			
+			//return strtab;
+	
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+	 	  e.printStackTrace();
+		}
+		//return strtab;
+	}
 }
+	
