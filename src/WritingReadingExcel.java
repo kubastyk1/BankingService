@@ -31,26 +31,19 @@ public class WritingReadingExcel {
 		} catch (IOException e) {
 		    e.printStackTrace();
 		}
-	}
+	}	
 	
 	public void readExcel(){
 		
 		try {
 		     
 		    FileInputStream file = new FileInputStream(new File(filename));
-		     
-		    //Get the workbook instance for XLS file 
 		    HSSFWorkbook workbook = new HSSFWorkbook(file);
-		 
-		    //Get first sheet from the workbook
 		    HSSFSheet sheet = workbook.getSheetAt(0);
-		     
-		    //Iterate through each rows from first sheet
+
 		    Iterator<Row> rowIterator = sheet.iterator();
 		    while(rowIterator.hasNext()) {
 		        Row row = rowIterator.next();
-		         
-		        //For each row, iterate through each columns
 		        Iterator<Cell> cellIterator = row.cellIterator();
 		        while(cellIterator.hasNext()) {
 		             
@@ -132,22 +125,17 @@ public class WritingReadingExcel {
 		}
 	}
 	
-	public void updateExcel(){
+	public void updateExcel(Object[] table, double money){
 		
 		try {
 		    FileInputStream file = new FileInputStream(new File(filename));
-		 
 		    HSSFWorkbook workbook = new HSSFWorkbook(file);
 		    HSSFSheet sheet = workbook.getSheetAt(0);
-		    //Cell cell = null;
-		 
-		   /* Object[] strtab = new Object[argnumber];
-			strtab =*/ chooseClient();
-			
-			/*for(Object s: strtab)
-				System.out.println(s + " / --  / ");
-			*/
-			
+
+			double rown = (double) table[0];
+			int rr = (int) rown;
+			Cell cell = sheet.getRow(rr).getCell(argnumber-1);
+			cell.setCellValue(money);
 			
 		    //Update the value of cell
 		    /*cell = sheet.getRow(1).getCell(2);
@@ -158,8 +146,8 @@ public class WritingReadingExcel {
 		    cell.setCellValue(cell.getNumericCellValue() * 2);
 		     
 		    file.close();
-		     
-		    saveInExcel(workbook);*/
+		     */
+		    saveInExcel(workbook);
 		     
 		} catch (FileNotFoundException e) {
 		    e.printStackTrace();
@@ -175,20 +163,20 @@ public class WritingReadingExcel {
 		
 		Row row = sheet.createRow(0);
 		Cell cell = row.createCell(0);
-		cell.setCellValue("Nr.konta");
+		cell.setCellValue("Nr.konta /t/t");
 		cell = row.createCell(1);
-		cell.setCellValue("Imie ");
+		cell.setCellValue("Imie /t/t");
 		cell = row.createCell(2);
-		cell.setCellValue("Nazwisko");
+		cell.setCellValue("Nazwisko /t/t");
 		cell = row.createCell(3);
-		cell.setCellValue("PESEL ");
+		cell.setCellValue("PESEL /t/t");
 		cell = row.createCell(4);
-		cell.setCellValue("Stan konta ");
+		cell.setCellValue("Stan konta /t/t");
 		
 		saveInExcel(workbook);
 	}
 	
-	public void/* Object[]*/ chooseClient(){
+	public Object[] chooseClient(){
 		
 		Object[] strtab = new Object[argnumber];
 		try {
@@ -196,45 +184,45 @@ public class WritingReadingExcel {
 		 
 		    HSSFWorkbook workbook = new HSSFWorkbook(file);
 		    HSSFSheet sheet = workbook.getSheetAt(0);
-		 
+		    
+		    readExcel();
 		    Scanner scr = new Scanner(System.in);
 			System.out.println("Podaj numer klienta: ");
-			int clientnum = scr.nextInt();
-
-			Cell cell = sheet.getRow(clientnum).getCell(0);
+			int clientNumber = scr.nextInt();
+				
+			Cell cell = sheet.getRow(clientNumber).getCell(0);
 			double d = cell.getNumericCellValue();
 			
-			if(d == clientnum){
+			if(d == clientNumber){
 				for(int i = 0; i < argnumber; i++){
-					cell = sheet.getRow(clientnum).getCell(i);
+					cell = sheet.getRow(clientNumber).getCell(i);
 				
 					switch(cell.getCellType()) {
 	                case Cell.CELL_TYPE_BOOLEAN:
-	                    System.out.print(cell.getBooleanCellValue() + "\t");
+	                    //System.out.print(cell.getBooleanCellValue() + "\t");
 	                    strtab[i] = cell.getBooleanCellValue();
 	                    break;
 	                case Cell.CELL_TYPE_NUMERIC:
-	                    System.out.print(cell.getNumericCellValue() + "\t");
+	                    //System.out.print(cell.getNumericCellValue() + "\t");
 	                    strtab[i] = cell.getNumericCellValue();
 	                    break;
 	                case Cell.CELL_TYPE_STRING:
-	                    System.out.print(cell.getStringCellValue() + "\t");
+	                    //System.out.print(cell.getStringCellValue() + "\t");
 	                    strtab[i] = cell.getStringCellValue();
 	                    break;
 					}
-					System.out.println();
+					//System.out.println();
 				}
+				
 			}else
 				System.out.println("Nie ma takiego klienta ");
-			
-			//return strtab;
 	
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
 		} catch (IOException e) {
 	 	  e.printStackTrace();
 		}
-		//return strtab;
+		return strtab;
 	}
 }
 	

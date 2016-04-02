@@ -69,7 +69,7 @@ public class WritingReadingTxt {
 		return count;
 	}
 	
-	public void writePayment(int clientNumber, float oldMoney, float money){
+	public void writePayment(int clientNumber, double oldMoney, double money){
 		
 		String line, input = "", fullInput = "", helper = "", helper2 = "";
 		BufferedReader bufferedReader = initialize();
@@ -80,7 +80,7 @@ public class WritingReadingTxt {
 				input += line +  System.lineSeparator();
 			}
 			helper = bufferedReader.readLine();		
-			helper = helper.replace(Float.toString(oldMoney), Float.toString(money));		
+			helper = helper.replace(Double.toString(oldMoney), Double.toString(money));		
 			helper2 = System.lineSeparator();
 		    while ((line = bufferedReader.readLine()) != null)
 		        helper2 += line + System.lineSeparator();
@@ -158,9 +158,10 @@ public class WritingReadingTxt {
 		return accountNumber;
 	}
 	
-	public void saveInTxt(String name, String lastName, String pesel, float money, int accountNumber) {
+	
+	public void saveInTxt(String name, String lastName, String pesel, double money, int accountNumber) {
 		
-		String my_money = Float.toString(money);
+		String my_money = Double.toString(money);
 		String my_number = Integer.toString(accountNumber);
 		clients = Arrays.asList(my_number, name, lastName, pesel, my_money);
 		if(!Files.exists(file)){
