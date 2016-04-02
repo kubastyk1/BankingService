@@ -200,17 +200,14 @@ public class WritingReadingExcel {
 		    Scanner scr = new Scanner(System.in);
 			System.out.println("Podaj numer klienta: ");
 			int clientnum = scr.nextInt();
-			double du = 1;
+
 			Cell cell = sheet.getRow(clientnum).getCell(0);
 			double d = cell.getNumericCellValue();
-			System.out.println(d + " d ");
+			
 			if(d == clientnum){
-				//Row row = sheet.createRow(clientnum);
 				for(int i = 0; i < argnumber; i++){
 					cell = sheet.getRow(clientnum).getCell(i);
-					
-					/*du = cell.getNumericCellValue();
-					System.out.println( du + "---**");*/
+				
 					switch(cell.getCellType()) {
 	                case Cell.CELL_TYPE_BOOLEAN:
 	                    System.out.print(cell.getBooleanCellValue() + "\t");
@@ -225,6 +222,7 @@ public class WritingReadingExcel {
 	                    strtab[i] = cell.getStringCellValue();
 	                    break;
 					}
+					System.out.println();
 				}
 			}else
 				System.out.println("Nie ma takiego klienta ");
