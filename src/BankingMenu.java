@@ -12,13 +12,16 @@ public class BankingMenu {
 		System.out.println("Witaj w systemie bankowym: ");
 		
 			System.out.println("");
-			System.out.println("1. Za³u¿ konto ");
-			System.out.println("2. Dokonaj wp³aty ");
-			System.out.println("3. Dokonaj wyp³aty ");
-			System.out.println("4. Wybór klienta ");
-			System.out.println("5. Wyœwietl wszystkich klientów  ");
+			System.out.println("1. Zaluz konto ");
+			System.out.println("2. Dokonaj wplaty ");
+			System.out.println("3. Dokonaj wyplaty ");
+			System.out.println("4. Wybor klienta ");
+			System.out.println("5. Wyswietl wszystkich klientow  ");
+			System.out.println("4. Transfer pieniedzy ");
+			System.out.println("5. Informacja o kliencje ");
+			System.out.println("6. Informacja o wszystkich ");
 			System.out.println("-----------");
-			System.out.println("9. Zakoñcz");
+			System.out.println("9. Zakoncz");
 			System.out.println("Wybierz polecenie: ");
 		do{
 			try {
