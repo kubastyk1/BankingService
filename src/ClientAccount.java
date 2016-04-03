@@ -10,7 +10,7 @@ public class ClientAccount {
 	
 	public void createAccount(){
 		
-		Scanner scr = new Scanner(System.in);
+		try(Scanner scr = new Scanner(System.in)){
 		do{
 			System.out.println("Podaj imiê: ");
 			name = scr.nextLine();
@@ -30,10 +30,13 @@ public class ClientAccount {
 		//ioAccount.saveInTxt(name, lastName, pesel, money, accountNumber);
 		String[] strtab = {Integer.toString(accountnumber), name, lastname, pesel, Double.toString(money)};
 		excel.writeExcel(strtab);
+		}
+		
 	}
 	
 	public void paymentOnAccount(){
 		
+		try(Scanner scr = new Scanner(System.in)){
 		//String[] table = ioAccount.chooseClient();
 		Object[] table = excel.chooseClient();
 		//double oldMoney = (double) table[4];
@@ -41,35 +44,28 @@ public class ClientAccount {
 		double oldMoney = Double.parseDouble(oldmoney);
 		System.out.println("zombie");
 		//double oldMoney = Double.parseDouble(table[4]);
-		Scanner scr = new Scanner(System.in);
 		System.out.println("Stan konta wynosi: " + oldMoney + " $ ");
 		System.out.println("Podaj kwotê do wp³aty: ");
-		try{
-			money = oldMoney + scr.nextDouble();
-		} catch(InputMismatchException e){
-			e.printStackTrace();
-		}
+		money = oldMoney + scr.nextDouble();
 		System.out.println("Stan konta wynosi: " + money + " $ ");
 		//ioAccount.writePayment(Integer.parseInt(table[0]), oldMoney, money);
 		excel.updateExcel(table, money);
-		
+		}catch(InputMismatchException e){
+			e.printStackTrace();
+		}
 	}
 	
 	public void paymentOffAccount(){
 		
+		try(Scanner scr = new Scanner(System.in)){
 		//String[] table = ioAccount.chooseClient();
 		Object[] table = excel.chooseClient();
 		//double oldMoney = Double.parseDouble(table[4]);
 		double oldMoney = (double) table[4];
 		double sum = 0;
-		Scanner scr = new Scanner(System.in);
 		System.out.println("Stan konta wynosi: " + money + " $ ");
 		System.out.println("Podaj kwotê do wyp³aty: ");
-		try{
-			sum = scr.nextFloat();
-		} catch(InputMismatchException e){
-			e.printStackTrace();
-		}
+		sum = scr.nextFloat();
 		if(oldMoney < sum){
 			System.out.println("Niewystarczaj¹ca iloœæ pieniêdzy. Wpisz 0 by wyjœæ.");
 			paymentOffAccount();
@@ -79,6 +75,9 @@ public class ClientAccount {
 		}
 		//ioAccount.writePayment(Integer.parseInt(table[0]), oldMoney, money);
 		excel.updateExcel(table, money);
+		}catch(InputMismatchException e){
+			e.printStackTrace();
+		}
 	}
 	
 	

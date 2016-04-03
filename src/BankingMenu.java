@@ -1,6 +1,5 @@
-import java.io.FileNotFoundException;
+import java.io.File;
 import java.util.Scanner;
-
 
 public class BankingMenu {
 
@@ -29,10 +28,11 @@ public class BankingMenu {
 				g = Integer.parseInt(s1);
 			}catch (NumberFormatException e){
 				System.out.println("Mozesz wprowadzic tylko liczby! ");
+				mainMenu();
 			}
 			chooseAnOption(g);
 		}while(!s1.equalsIgnoreCase("close"));
-		
+		odczyt.close();
 	}
 	
 	public void chooseAnOption(int g) {
@@ -40,6 +40,12 @@ public class BankingMenu {
 		ClientAccount account = new  ClientAccount();
 		WritingReadingTxt ioAccount = new WritingReadingTxt();
 		WritingReadingExcel excel = new WritingReadingExcel();
+		
+		File file = new File(excel.filename);						//Excel
+		if(!file.exists()){
+			excel.createExcel();
+		}
+		
 		switch(g) {
 		case 1: account.createAccount();
 				break;
@@ -54,8 +60,6 @@ public class BankingMenu {
 		case 6: excel.createExcel();
 				break;
 		case 7: excel.readExcel();
-				break;
-		case 8: excel.updateExcel();
 				break;
 		default: System.out.println("Koniec programu");
 				System.exit(1);

@@ -69,11 +69,12 @@ public class WritingReadingTxt {
 		return count;
 	}
 	
-	public void writePayment(int clientNumber, double oldMoney, double money){
+	public void writePayment(int clientNumber, double oldMoney, double money) {
 		
 		String line, input = "", fullInput = "", helper = "", helper2 = "";
 		BufferedReader bufferedReader = initialize();
 		int lineNumber = ((clientNumber - 1) * argNumber) + 4;
+		FileOutputStream os = null;
 		try{
 			for(i = 0; i < lineNumber; i++ ){
 				line = bufferedReader.readLine();
@@ -85,7 +86,7 @@ public class WritingReadingTxt {
 		    while ((line = bufferedReader.readLine()) != null)
 		        helper2 += line + System.lineSeparator();
 		    fullInput = input + helper + helper2;		
-		    FileOutputStream os = new FileOutputStream(filePath);
+		    os = new FileOutputStream(filePath);
 			os.write(fullInput.getBytes());
 			
 		} catch (IOException e) {
@@ -117,18 +118,13 @@ public class WritingReadingTxt {
 	public String[] chooseClient() {
 		
 		showClients();
-		Scanner scr = new Scanner(System.in);
 		int clientNumber = 0;
 		System.out.println("Podaj numer klienta: ");
-		try{
+		try(Scanner scr = new Scanner(System.in)){
+			
 			clientNumber = scr.nextInt();
-		} catch(InputMismatchException e){
-			e.printStackTrace();
-		}
-		int numberOfLine = (clientNumber - 1) * argNumber;
-		BufferedReader bufferedReader = initialize();
-
-		try {	
+			int numberOfLine = (clientNumber - 1) * argNumber;
+			BufferedReader bufferedReader = initialize();
 			bufferedReader = goToLine(bufferedReader, numberOfLine);
 			i=0;		//must be zero
 		    do{
@@ -136,10 +132,12 @@ public class WritingReadingTxt {
 		    	i++;
 		    }while(i != argNumber);
 		    printingInformation();
+		    
+		} catch(InputMismatchException e){
+			e.printStackTrace();    
 		}catch (IOException e){
 			e.printStackTrace();
-		  }
-		
+		}
 		return table;
 	   }
 	
@@ -164,21 +162,14 @@ public class WritingReadingTxt {
 		String my_money = Double.toString(money);
 		String my_number = Integer.toString(accountNumber);
 		clients = Arrays.asList(my_number, name, lastName, pesel, my_money);
-		if(!Files.exists(file)){
-			try {
-			    Files.createFile(file);
-			} catch (IOException x) {
-			    System.err.format("createFile error: %s%n", x);
-			}
-		}
-		
 		try{
+			if(!Files.exists(file))
+			    Files.createFile(file);
 			BufferedReader bufferedReader = initialize();
 			bufferedReader.readLine();
 			Files.write(file, clients, Charset.forName("UTF-8"), StandardOpenOption.APPEND);
-		}catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+		} catch (IOException x) {
+		    System.err.format("createFile error: %s%n", x);
 		}
 	}
 }
